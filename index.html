@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sliding window calc</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Sliding Window Calculator</h1>
+    <!-- Width -->
+    <div>
+      <input type="number" id="width__input" placeholder="0000 in mm"/>
+      <label for="width__input">Width</label>
+      
+      <div class="error-message widthError">Please input a valid number</div>
+    </div>
+    <!-- Height -->
+    <div>
+      <input type="number" id="height__input" placeholder="0000 in mm"/>
+      <label for="height__input">Height</label>
+      <div class="error-message heightError">Please input a valid number</div>
+    </div>
+
+    <button id="compute">COMPUTE</button>
+    
+    <div class="answers">
+      
+      <p class="track">
+        <b>Track: </b>
+        <span class="track-output"></span>
+      </p>
+      <p class="jamb">
+        <b>Side Jamb: </b>
+        <span class="jamb-output"></span>
+      </p>
+      <p class="top">
+        <b>Top: </b>
+        <span class="top-output"></span>
+      </p>
+      <p class="lobster">
+        <b>Interlock and Lobster: </b>
+        <span class="lobster-output"></span>
+      </p>
+      <p class="glass-width">
+        <b>Glass Width: </b>
+        <span class="glass-width-output"></span>
+      </p>
+      <p class="glass-height">
+        <b>Glass Height: </b>
+        <span class="glass-height-output"></span>
+      </p>
+    </div>
+    <article>(All in Millimetres<b>(mm))</b></article>
+  </main>
+  <script src="./main.js"></script>
+</body>
+</html>

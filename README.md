@@ -1,0 +1,2 @@
+# Hi! I'm [**Ehi Ejakhian**](https://ehiejakhian.github.io/)
+This calculator is part of a bigger project to build a decent app to help aluminum craftsmen to make their work life easier. Especially when doing repetitive tasks like calculating window stile measurements.
