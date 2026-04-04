@@ -6,7 +6,8 @@ var track = null;
 var jamb = null;
 var lobster = null;
 var topWidth = null;
-btn.addEventListener('click', ()=> {
+btn.addEventListener('click', (e) => {
+  e.preventDefault();
   console.log('clicked')
   if (!width.value) {
     width.classList.add('error');
@@ -30,54 +31,64 @@ function calculate() {
 }
 
 function display() {
-  document.querySelector('.answers').classList.add('show');
-  document.querySelector('.track-output').textContent = track;
-  document.querySelector('.jamb-output').textContent = jamb;
-  document.querySelector('.lobster-output').textContent = lobster;
-  document.querySelector('.top-output').textContent = topWidth;
-  document.querySelector('.glass-width-output').textContent = glassWidth;
-  document.querySelector('.glass-height-output').textContent = glassHeight;
+  let temp = document.querySelector('#table');
+  temp = temp.content;
+  let clone = document.importNode(temp, true);
+
+  clone.querySelector('.track').textContent = track;
+  clone.querySelector('.side-jamb').textContent = jamb;
+  clone.querySelector('.lock-stile').textContent = lobster;
+  clone.querySelector('.interlock').textContent = lobster;
+  clone.querySelector('.top').textContent = topWidth;
+  clone.querySelector('.g-width').textContent = glassWidth;
+  clone.querySelector('.g-height').textContent = glassHeight;
   
+  let results = document.querySelector('.results');
+  results.appendChild(clone);
+  results.classList.add('show');
 }
 
-let w_err = document.querySelector('.widthError');
-let h_err = document.querySelector('.heightError');
 setInterval(()=>{
   error();
 }, 100);
 
 
 function error() {
+  let width__field = width.closest('.field');
+  let height__field = height.closest('.field');
+  let w_err = document.querySelector('.widthError');
+  let h_err = document.querySelector('.heightError');
+
   width.addEventListener('keyup', ()=>{
     if (!width.value) {
-      width.classList.add('error');
+      width__field.classList.add('error');
       w_err.textContent = 'Empty?'
     } else {
       if (width.value.length < 3) {
-        width.classList.add('error');
+        width__field.classList.add('error');
         w_err.textContent = 'Is\'nt this too small?';
       } else if(width.value > 16000) {
-        width.classList.add('error');
+        width__field.classList.add('error');
         w_err.textContent = 'That\'s way large than what we have (16,000 mm)';
       } else {
-        width.classList.remove('error');
+        width__field.classList.remove('error');
         w_err.textContent = '';
       }
     }
   })
   height.addEventListener('keyup', ()=>{
     if (!height.value) {
-      height.classList.add('error');
+      height__field.classList.add('error');
       h_err.textContent = 'Empty?'
     } else {
       if (height.value.length < 3) {
-        height.classList.add('error');
+        height__field.classList.add('error');
         h_err.textContent = 'Is\'nt this too small?';
       } else if(height.value > 16000) {
-        height.classList.add('error');
+        height__field.classList.add('error');
         h_err.textContent = 'That\'s way large than what we have (16,000 mm)';
       } else {
-        height.classList.remove('error');
+        height__field.classList.remove('error');
         h_err.textContent = '';
       }
     }

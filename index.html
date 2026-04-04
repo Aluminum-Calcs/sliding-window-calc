@@ -4,58 +4,141 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="./assets/images/logos/logo.ico" type="image/x-icon">
   <title>Sliding window calc</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./scss/css/main.css">
+  <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
 </head>
 
 <body>
-  <main>
-    <h1>Sliding Window Calculator</h1>
-    <!-- Width -->
-    <div>
-      <input type="number" id="width__input" placeholder="0000 in mm"/>
-      <label for="width__input">Width</label>
-      
-      <div class="error-message widthError">Please input a valid number</div>
+  <header>
+    <div class="wrapper">
+      <div class="logo">
+        <h2>Aluminum Calc</h2>
+        <span>Sliding Window Calc</span>
+      </div>
+      <input type="checkbox" id="ch" />
+      <label for="ch" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <label for="ch" class="overlay"></label>
+      <nav>
+        <label for="ch" class="close">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+  
+        <ul>
+          <li><a href="aluminum-calcs.github.io/">Home</a></li>
+          <li><a href="aluminum-calcs.github.io/item-price-calc/">Item Price Calc</a></li>
+          <li><a href="aluminum-calcs.github.io/sliding-window-calc/">Aluminum Channels</a></li>
+          <li><a href="ehiejakhian.github.io/OHONS-TECH/">Visit Ohons Tech </a></li>
+        </ul>
+      </nav>
     </div>
-    <!-- Height -->
-    <div>
-      <input type="number" id="height__input" placeholder="0000 in mm"/>
-      <label for="height__input">Height</label>
-      <div class="error-message heightError">Please input a valid number</div>
+  </header>
+
+  <main>
+    <form>
+      <div class="wrapper">
+        <!-- Width -->
+        <div class="field">
+          <div class="field__container">
+            <input type="number" id="width__input" placeholder="0000 in mm" value="900"/>
+            <label for="width__input">Width</label>
+          </div>
+          
+          <div class="error-message widthError">Please input a valid number</div>
+        </div>
+  
+        <!-- Height -->
+        <div class="field">
+          <div class="field__container">
+            <input type="number" id="height__input" placeholder="0000 in mm" value="1200"/>
+            <label for="height__input">Height</label>
+          </div>
+          <div class="error-message heightError">Please input a valid number</div>
+        </div>
+  
+        <!-- Quantity -->
+        <!-- <div class="field">
+          <div class="field__container">
+            <input type="number" id="qty__input" placeholder="00" value="1"/>
+            <label for="qty__input">Quantity</label>
+          </div>
+          <div class="error-message qtyError">Please input a valid number</div>
+        </div> -->
+  
+        <button id="compute">
+          <i class="fa fa-calculator"></i>
+          <span>CALCULATE</span>
+        </button>
+      </div>
+    </form>
+
+    <div class="results wrapper">
+      <template id="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Channel</th>
+              <th>Length (mm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Track</td>
+              <td class="track">12000</td>
+            </tr>
+            <tr>
+              <td>Side Jamb</td>
+              <td class="side-jamb">1100</td>
+            </tr>
+            <tr>
+              <td>Top</td>
+              <td class="top">2300</td>
+            </tr>
+            <tr>
+              <td>Lock-stile</td>
+              <td class="lock-stile">1200</td>
+            </tr>
+            <tr>
+              <td>Interlock</td>
+              <td class="interlock">1200</td>
+            </tr>
+            <tr>
+              <td>Glass Width</td>
+              <td class="g-width">120</td>
+            </tr>
+            <tr>
+              <td>Glass Height</td>
+              <td class="g-height">140</td>
+            </tr>
+          </tbody>
+          <!-- <tfoot>
+            <tr>
+              <td>Total</td>
+              <td>25,000</td>
+            </tr>
+          </tfoot> -->
+        </table>
+      </template>
     </div>
 
-    <button id="compute">COMPUTE</button>
-    
-    <div class="answers">
-      
-      <p class="track">
-        <b>Track: </b>
-        <span class="track-output"></span>
-      </p>
-      <p class="jamb">
-        <b>Side Jamb: </b>
-        <span class="jamb-output"></span>
-      </p>
-      <p class="top">
-        <b>Top: </b>
-        <span class="top-output"></span>
-      </p>
-      <p class="lobster">
-        <b>Interlock and Lobster: </b>
-        <span class="lobster-output"></span>
-      </p>
-      <p class="glass-width">
-        <b>Glass Width: </b>
-        <span class="glass-width-output"></span>
-      </p>
-      <p class="glass-height">
-        <b>Glass Height: </b>
-        <span class="glass-height-output"></span>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__content">
+      <p>
+        <span>Meet the developer</span>
+        <a href="https://ehiejakhian.github.io/">Ehi Ejakhian</a>
       </p>
     </div>
-    <article>(All in Millimetres<b>(mm))</b></article>
-  </main>
-  <script src="./main.js"></script>
+  </footer>
+
+  <script src="./scripts/main.js"></script>
 </body>
 </html>
