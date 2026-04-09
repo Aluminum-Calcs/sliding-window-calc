@@ -309,6 +309,9 @@ form {
   }
   button {
     @include btn;
+    & {
+      padding: 10px;
+    }
   }
 }
 
@@ -335,7 +338,15 @@ form {
       :first-child {
         text-align: left;
       }
-      :last-child {
+      :nth-child(2) {
+        text-align: center;
+      }
+      :nth-child(3) {
+        text-align: right;
+      }
+    }
+    tfoot {
+      :nth-child(2) {
         text-align: right;
       }
     }

@@ -389,6 +389,9 @@ form button:hover {
   border-color: var(--txt);
   color: #fff;
 }
+form button {
+  padding: 10px;
+}
 
 .results {
   margin-top: 20px;
@@ -420,7 +423,13 @@ form button:hover {
 .results table tr :first-child {
   text-align: left;
 }
-.results table tr :last-child {
+.results table tr :nth-child(2) {
+  text-align: center;
+}
+.results table tr :nth-child(3) {
+  text-align: right;
+}
+.results table tfoot :nth-child(2) {
   text-align: right;
 }
 
