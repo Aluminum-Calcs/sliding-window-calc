@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" href="./assets/images/logos/logo.ico" type="image/x-icon">
-  <title>Sliding window calc</title>
+  <title>Window Stile calc</title>
   <link rel="stylesheet" href="./scss/css/main.css">
   <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
 </head>
@@ -15,7 +15,7 @@
     <div class="wrapper">
       <div class="logo">
         <h2>Aluminum Calc</h2>
-        <span>Sliding Window Calc</span>
+        <span>Window Stile calc</span>
       </div>
       <input type="checkbox" id="ch" />
       <label for="ch" class="hamburger">
@@ -44,6 +44,24 @@
   <main>
     <form>
       <div class="wrapper">
+        <fieldset>
+          <legend>Select Window Type</legend>
+          <div class="types">
+            <label for="casement">
+              <input type="radio" name="type" id="casement">
+              <span>Casement Window</span>
+            </label>
+            <label for="sliding">
+              <input type="radio" name="type" id="sliding">
+              <span>sliding Window</span>
+            </label>
+            <label for="frameless">
+              <input type="radio" name="type" id="frameless">
+              <span>frameless Window</span>
+            </label>
+            <div class="error-msg">Please select a window type</div>
+          </div>
+        </fieldset>
         <!-- Width -->
         <div class="field">
           <div class="field__container">

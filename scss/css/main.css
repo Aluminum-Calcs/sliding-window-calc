@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "cascadia-code";
   src: url("../../assets/fonts/cascadia-code.ttf");
@@ -291,6 +292,84 @@ form {
   form {
     padding: 0;
   }
+}
+form fieldset {
+  grid-row: span 2;
+  border: 1px solid;
+  display: flex;
+  justify-content: normal;
+  align-items: normal;
+  flex-flow: column;
+  gap: 0;
+}
+form fieldset legend {
+  margin-left: 10px;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+form fieldset .types {
+  padding: 20px;
+  display: flex;
+  justify-content: normal;
+  align-items: normal;
+  flex-flow: column;
+  gap: 15px;
+}
+form fieldset .types label {
+  text-transform: capitalize;
+  border: 1px solid;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+  flex-flow: row;
+  gap: 10px;
+}
+form fieldset .types label input {
+  appearance: none;
+  outline: transparent;
+  border: 1px solid;
+  width: 20px;
+  height: 20px;
+  background: var(--bg);
+}
+form fieldset .types label input:checked::after {
+  transition: all 0.3s;
+  content: "✓";
+  width: 100%;
+  height: 100%;
+  background: var(--txt);
+  color: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row;
+  gap: 0;
+}
+form fieldset .types .error-msg {
+  font-weight: bold;
+  font-size: 13px;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+  flex-flow: row;
+  gap: 10px;
+}
+form fieldset .types .error-msg::before {
+  content: "!";
+  border: 1px solid;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: rgba(220, 20, 60, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row;
+  gap: 0;
 }
 form .field {
   display: flex;

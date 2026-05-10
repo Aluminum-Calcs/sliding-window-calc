@@ -46,6 +46,23 @@ $desktop: 1100px;
     color: #fff;
   }
 }
+
+@mixin error-msg() {
+  font-weight: bold;
+  font-size: 13px;
+  transition: all .3s;
+  @include df(normal, center, row, 10px);
+  &::before {
+    content:'!';
+    border: 1px solid;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: rgba(crimson,.1);
+    @include df(center, center);
+  }
+}
+
 @keyframes blink {
   0% {opacity: 1;}
   50% {opacity: 0;}
@@ -243,6 +260,50 @@ form {
   }
   @media (min-width: $desktop) {
     padding: 0;
+  }
+  fieldset {
+    grid-row: span 2;
+    border: 1px solid;
+    @include df(normal, normal, column);
+    legend {
+      margin-left: 10px;
+      padding: 0 10px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .types {
+      padding: 20px;
+      @include df(normal, normal, column, 15px);
+      label {
+        text-transform: capitalize;
+        border: 1px solid;
+        padding: 10px;
+        border-radius: 10px;
+        @include df(normal, center, row, 10px);
+        input {
+          appearance: none;
+          outline: transparent;
+          border: 1px solid;
+          width: 20px;
+          height: 20px;
+          background: var(--bg);
+          &:checked {
+            &::after {
+              transition: all .3s;
+              content: "✓";
+              width: 100%;
+              height: 100%;
+              background: var(--txt);
+              color: var(--bg);
+              @include df(center, center);
+            }
+          }
+        }
+      }
+      .error-msg {
+        @include error-msg;
+      }
+    }
   }
   .field {
     @include df(normal, normal, column, 5px);
