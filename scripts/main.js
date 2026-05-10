@@ -11,8 +11,10 @@ btn.addEventListener('click', (e) => {
   console.log('clicked')
   if (!width.value) {
     width.classList.add('error');
+    if (height.value) calculate("height");
   } else if (!height.value) {
     height.classList.add('error');
+    if (width.value) calculate("width");
   } else {
     width.classList.remove('error');
     height.classList.remove('error');
@@ -20,30 +22,118 @@ btn.addEventListener('click', (e) => {
   }
 })
 
-function calculate() {
-  track = width.value;
-  jamb = height.value - 23;
-  lobster = jamb - 27;
-  topWidth = (track - 166) / 2;
-  glassWidth = topWidth + 18;
-  glassHeight = lobster - 80;
-  display();
+function calculate(type = "all") {
+  if (type == "all") {
+    track = width.value;
+    jamb = height.value - 23;
+    lobster = jamb - 27;
+    topWidth = (track - 166) / 2;
+    glassWidth = topWidth + 18;
+    glassHeight = lobster - 80;
+    display();
+  } else if (type == "width") {
+    track = width.value;
+    topWidth = (track - 166) / 2;
+    glassWidth = topWidth + 18;
+    display(type);
+  } else if (type == "height") {
+    jamb = height.value - 23;
+    lobster = jamb - 27;
+    glassHeight = lobster - 80;
+    display(type)
+  }
 }
 
-function display() {
-  let temp = document.querySelector('#table');
+function display(type = "all") {
+  let temp = document.querySelector('template#table');
   temp = temp.content;
   let clone = document.importNode(temp, true);
-
-  clone.querySelector('.track').textContent = track;
-  clone.querySelector('.side-jamb').textContent = jamb;
-  clone.querySelector('.lock-stile').textContent = lobster;
-  clone.querySelector('.interlock').textContent = lobster;
-  clone.querySelector('.top').textContent = topWidth;
-  clone.querySelector('.g-width').textContent = glassWidth;
-  clone.querySelector('.g-height').textContent = glassHeight;
+  if (type == "all") {
+    clone.querySelector('tbody').innerHTML = `
+      <tr>
+        <td>Track</td>
+        <td class="track">${track}</td>
+        <td class="track-price">5000</td>
+      </tr>
+      <tr>
+        <td>Side Jamb</td>
+        <td class="side-jamb">${jamb}</td>
+        <td class="side-jamb-price">5000</td>
+      </tr>
+      <tr>
+        <td>Top</td>
+        <td class="top">${topWidth}</td>
+        <td class="top-price">5000</td>
+      </tr>
+      <tr>
+        <td>Lock-stile</td>
+        <td class="lock-stile">${lobster}</td>
+        <td class="lock-stile-price">5000</td>
+      </tr>
+      <tr>
+        <td>Interlock</td>
+        <td class="interlock">${lobster}</td>
+        <td class="interlock-price">5000</td>
+      </tr>
+      <tr>
+        <td>Glass Width</td>
+        <td class="g-width">${glassWidth}</td>
+        <td class="g-width-price">5000</td>
+      </tr>
+      <tr>
+        <td>Glass Height</td>
+        <td class="g-height">${glassHeight}</td>
+        <td class="g-height-price">5000</td>
+      </tr>
+    `;
+  } else if (type == "width") {
+    clone.querySelector('tbody').innerHTML = `
+    <tr>
+      <td>Track</td>
+      <td class="track">${track}</td>
+      <td class="track-price">5000</td>
+    </tr>
+    <tr>
+      <td>Top</td>
+      <td class="top">${topWidth}</td>
+      <td class="top-price">5000</td>
+    </tr>
+    <tr>
+    <tr>
+      <td>Glass Width</td>
+      <td class="g-width">${glassWidth}</td>
+      <td class="g-width-price">5000</td>
+    </tr>
+    `;
+    
+  } else if (type == "height") {
+    clone.querySelector('tbody').innerHTML = `
+      <tr>
+        <td>Side Jamb</td>
+        <td class="side-jamb">${jamb}</td>
+        <td class="side-jamb-price">5000</td>
+      </tr>
+      <tr>
+        <td>Lock-stile</td>
+        <td class="lock-stile">${lobster}</td>
+        <td class="lock-stile-price">5000</td>
+      </tr>
+      <tr>
+        <td>Interlock</td>
+        <td class="interlock">${lobster}</td>
+        <td class="interlock-price">5000</td>
+      </tr>
+      <tr>
+        <td>Glass Height</td>
+        <td class="g-height">${glassHeight}</td>
+        <td class="g-height-price">5000</td>
+      </tr>
+    `;
+    
+  }
   
   let results = document.querySelector('.results');
+  results.innerHTML = '';
   results.appendChild(clone);
   results.classList.add('show');
 }
