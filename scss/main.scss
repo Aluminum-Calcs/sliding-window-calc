@@ -50,6 +50,8 @@ $desktop: 1100px;
 @mixin error-msg() {
   font-weight: bold;
   font-size: 13px;
+  opacity: 0;
+  height: 0;
   transition: all .3s;
   @include df(normal, center, row, 10px);
   &::before {
@@ -302,6 +304,17 @@ form {
       }
       .error-msg {
         @include error-msg;
+      }
+    }
+    &.error {
+      border-color: crimson;
+      legend {
+        color: crimson;
+      }
+      .error-msg {
+        opacity: 1;
+        height: 100%;
+        color: crimson;
       }
     }
   }

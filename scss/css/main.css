@@ -351,6 +351,8 @@ form fieldset .types label input:checked::after {
 form fieldset .types .error-msg {
   font-weight: bold;
   font-size: 13px;
+  opacity: 0;
+  height: 0;
   transition: all 0.3s;
   display: flex;
   justify-content: normal;
@@ -370,6 +372,17 @@ form fieldset .types .error-msg::before {
   align-items: center;
   flex-flow: row;
   gap: 0;
+}
+form fieldset.error {
+  border-color: crimson;
+}
+form fieldset.error legend {
+  color: crimson;
+}
+form fieldset.error .error-msg {
+  opacity: 1;
+  height: 100%;
+  color: crimson;
 }
 form .field {
   display: flex;

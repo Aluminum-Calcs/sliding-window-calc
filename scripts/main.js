@@ -1,30 +1,52 @@
-let btn = document.querySelector('#compute');
-let width = document.querySelector('#width__input');
-let height = document.querySelector('#height__input');
+import { sel } from "./util/index.js";
 
-var track = null;
-var jamb = null;
-var lobster = null;
-var topWidth = null;
-btn.addEventListener('click', (e) => {
-  e.preventDefault();
-  console.log('clicked')
-  if (!width.value) {
+let inputWidth = sel('#width__input');
+let inputHeight = sel('#height__input');
+
+let sliding = {
+  track: 0,
+  jamb: 0,
+  lobster: 0,
+  top: 0,
+  gw: 0,
+  gh: 0
+}
+let casement = {
+  width: 0,
+  height: 0,
+  in_w: 0,
+  in_h: 0
+}
+let frameless = {
+  width: 0,
+  height: 0,
+  in_w: 0,
+  in_h: 0
+}
+
+export function checkForErrors(windowType = null) {
+  if (windowType == null) {
+    sel("form fieldset").classList.add('error');
+    return;
+  }else sel("form fieldset").classList.remove('error');
+
+
+  if (!inputWidth.value) {
     width.classList.add('error');
-    if (height.value) calculate("height");
+    if (height.value) calculate("height", windowType);
   } else if (!height.value) {
     height.classList.add('error');
-    if (width.value) calculate("width");
+    if (inputWidth.value) calculate("width", windowType);
   } else {
     width.classList.remove('error');
     height.classList.remove('error');
-    calculate();
+    calculate("all", windowType);
   }
-})
+}
 
 function calculate(type = "all") {
   if (type == "all") {
-    track = width.value;
+    track = inputWidth.value;
     jamb = height.value - 23;
     lobster = jamb - 27;
     topWidth = (track - 166) / 2;
@@ -32,7 +54,7 @@ function calculate(type = "all") {
     glassHeight = lobster - 80;
     display();
   } else if (type == "width") {
-    track = width.value;
+    track = inputWidth.value;
     topWidth = (track - 166) / 2;
     glassWidth = topWidth + 18;
     display(type);
@@ -150,14 +172,14 @@ function error() {
   let h_err = document.querySelector('.heightError');
 
   width.addEventListener('keyup', ()=>{
-    if (!width.value) {
+    if (!inputWidth.value) {
       width__field.classList.add('error');
       w_err.textContent = 'Empty?'
     } else {
-      if (width.value.length < 3) {
+      if (inputWidth.value.length < 3) {
         width__field.classList.add('error');
         w_err.textContent = 'Is\'nt this too small?';
-      } else if(width.value > 16000) {
+      } else if(inputWidth.value > 16000) {
         width__field.classList.add('error');
         w_err.textContent = 'That\'s way large than what we have (16,000 mm)';
       } else {
