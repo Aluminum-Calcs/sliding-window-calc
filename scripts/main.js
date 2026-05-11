@@ -1,28 +1,11 @@
 import { sel } from "./util/index.js";
+import display from "./display.js";
+import calculateCasement from "./casement.js";
+import calculateFrameless from "./frameless.js";
+import calculateSliding from "./sliding.js";
 
 let inputWidth = sel('#width__input');
 let inputHeight = sel('#height__input');
-
-let sliding = {
-  track: 0,
-  jamb: 0,
-  lobster: 0,
-  top: 0,
-  gw: 0,
-  gh: 0
-}
-let casement = {
-  width: 0,
-  height: 0,
-  in_w: 0,
-  in_h: 0
-}
-let frameless = {
-  width: 0,
-  height: 0,
-  in_w: 0,
-  in_h: 0
-}
 
 export function checkForErrors(windowType = null) {
   if (windowType == null) {
@@ -32,133 +15,27 @@ export function checkForErrors(windowType = null) {
 
 
   if (!inputWidth.value) {
-    width.classList.add('error');
-    if (height.value) calculate("height", windowType);
-  } else if (!height.value) {
-    height.classList.add('error');
+    inputWidth.closest('.field').classList.add('error');
+    if (inputHeight.value) calculate("height", windowType);
+  } else if (!inputHeight.value) {
+    inputHeight.closest('.field').classList.add('error');
     if (inputWidth.value) calculate("width", windowType);
   } else {
-    width.classList.remove('error');
-    height.classList.remove('error');
+    inputWidth.closest('.field').classList.remove('error');
+    inputHeight.closest('.field').classList.remove('error');
     calculate("all", windowType);
   }
 }
 
-function calculate(type = "all") {
-  if (type == "all") {
-    track = inputWidth.value;
-    jamb = height.value - 23;
-    lobster = jamb - 27;
-    topWidth = (track - 166) / 2;
-    glassWidth = topWidth + 18;
-    glassHeight = lobster - 80;
-    display();
-  } else if (type == "width") {
-    track = inputWidth.value;
-    topWidth = (track - 166) / 2;
-    glassWidth = topWidth + 18;
-    display(type);
-  } else if (type == "height") {
-    jamb = height.value - 23;
-    lobster = jamb - 27;
-    glassHeight = lobster - 80;
-    display(type)
-  }
+function calculate(input = "all", windowType) {
+  console.log(input, windowType);
+  if (windowType == "sliding") calculateSliding(input);
+
+  if (windowType == "casement") calculateCasement(input);
+
+  if (windowType == "frameless") calculateFrameless(input);
 }
 
-function display(type = "all") {
-  let temp = document.querySelector('template#table');
-  temp = temp.content;
-  let clone = document.importNode(temp, true);
-  if (type == "all") {
-    clone.querySelector('tbody').innerHTML = `
-      <tr>
-        <td>Track</td>
-        <td class="track">${track}</td>
-        <td class="track-price">5000</td>
-      </tr>
-      <tr>
-        <td>Side Jamb</td>
-        <td class="side-jamb">${jamb}</td>
-        <td class="side-jamb-price">5000</td>
-      </tr>
-      <tr>
-        <td>Top</td>
-        <td class="top">${topWidth}</td>
-        <td class="top-price">5000</td>
-      </tr>
-      <tr>
-        <td>Lock-stile</td>
-        <td class="lock-stile">${lobster}</td>
-        <td class="lock-stile-price">5000</td>
-      </tr>
-      <tr>
-        <td>Interlock</td>
-        <td class="interlock">${lobster}</td>
-        <td class="interlock-price">5000</td>
-      </tr>
-      <tr>
-        <td>Glass Width</td>
-        <td class="g-width">${glassWidth}</td>
-        <td class="g-width-price">5000</td>
-      </tr>
-      <tr>
-        <td>Glass Height</td>
-        <td class="g-height">${glassHeight}</td>
-        <td class="g-height-price">5000</td>
-      </tr>
-    `;
-  } else if (type == "width") {
-    clone.querySelector('tbody').innerHTML = `
-    <tr>
-      <td>Track</td>
-      <td class="track">${track}</td>
-      <td class="track-price">5000</td>
-    </tr>
-    <tr>
-      <td>Top</td>
-      <td class="top">${topWidth}</td>
-      <td class="top-price">5000</td>
-    </tr>
-    <tr>
-    <tr>
-      <td>Glass Width</td>
-      <td class="g-width">${glassWidth}</td>
-      <td class="g-width-price">5000</td>
-    </tr>
-    `;
-    
-  } else if (type == "height") {
-    clone.querySelector('tbody').innerHTML = `
-      <tr>
-        <td>Side Jamb</td>
-        <td class="side-jamb">${jamb}</td>
-        <td class="side-jamb-price">5000</td>
-      </tr>
-      <tr>
-        <td>Lock-stile</td>
-        <td class="lock-stile">${lobster}</td>
-        <td class="lock-stile-price">5000</td>
-      </tr>
-      <tr>
-        <td>Interlock</td>
-        <td class="interlock">${lobster}</td>
-        <td class="interlock-price">5000</td>
-      </tr>
-      <tr>
-        <td>Glass Height</td>
-        <td class="g-height">${glassHeight}</td>
-        <td class="g-height-price">5000</td>
-      </tr>
-    `;
-    
-  }
-  
-  let results = document.querySelector('.results');
-  results.innerHTML = '';
-  results.appendChild(clone);
-  results.classList.add('show');
-}
 
 setInterval(()=>{
   error();
@@ -166,12 +43,12 @@ setInterval(()=>{
 
 
 function error() {
-  let width__field = width.closest('.field');
-  let height__field = height.closest('.field');
+  let width__field = inputWidth.closest('.field');
+  let height__field = inputHeight.closest('.field');
   let w_err = document.querySelector('.widthError');
   let h_err = document.querySelector('.heightError');
 
-  width.addEventListener('keyup', ()=>{
+  inputWidth.addEventListener('keyup', ()=>{
     if (!inputWidth.value) {
       width__field.classList.add('error');
       w_err.textContent = 'Empty?'
@@ -188,15 +65,15 @@ function error() {
       }
     }
   })
-  height.addEventListener('keyup', ()=>{
-    if (!height.value) {
+  inputHeight.addEventListener('keyup', ()=>{
+    if (!inputHeight.value) {
       height__field.classList.add('error');
       h_err.textContent = 'Empty?'
     } else {
-      if (height.value.length < 3) {
+      if (inputHeight.value.length < 3) {
         height__field.classList.add('error');
         h_err.textContent = 'Is\'nt this too small?';
-      } else if(height.value > 16000) {
+      } else if(inputHeight.value > 16000) {
         height__field.classList.add('error');
         h_err.textContent = 'That\'s way large than what we have (16,000 mm)';
       } else {
