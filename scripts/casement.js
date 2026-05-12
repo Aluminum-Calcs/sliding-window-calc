@@ -1,7 +1,7 @@
 import { sel } from "./util/index.js";
 import display from "./display.js";
 
-export default function calculateCasement(input, sash = 1) {
+export default function calculateCasement(input, sash) {
   let w = sel('#width__input');
   w = w? w.value: 0;
   let h = sel('#height__input');
@@ -13,7 +13,7 @@ export default function calculateCasement(input, sash = 1) {
   let html = null;
   
   if (input == "width") {
-    sash = 1? in_w = w - 70: in_w = (w - 110) / 2;
+    sash == 1? in_w = w - 70: in_w = (w - 110) / 2;
     gw = in_w - 130;
     html = `
       <tr>
@@ -32,7 +32,7 @@ export default function calculateCasement(input, sash = 1) {
         <td>--</td>
       </tr>
     `;
-    sash = 2 ? html += `
+    sash == 2 ? html += `
       <tr>
         <td>Molium Placement</td>
         <td>${(w - 42) / 2}</td>
@@ -41,7 +41,7 @@ export default function calculateCasement(input, sash = 1) {
     `: null;
   } else if (input == "height") {
     in_h = h - 70;
-    gh = inh - 130;
+    gh = in_h - 130;
     html = `
       <tr>
         <td>Height</td>
@@ -59,7 +59,7 @@ export default function calculateCasement(input, sash = 1) {
         <td>--</td>
       </tr>
     `;
-    sash = 2 ? html += `
+    sash == 2 ? html += `
       <tr>
         <td>Molium height</td>
         <td>${h - 60}</td>
@@ -68,7 +68,7 @@ export default function calculateCasement(input, sash = 1) {
     `: null;
   } else {
     in_h = h - 70;
-    sash = 1? in_w = w - 70: in_w = (w - 110) / 2;
+    sash == 1? in_w = w - 70: in_w = (w - 110) / 2;
     gh = in_h - 130;
     gw = in_w - 130;
     html = `
@@ -103,7 +103,7 @@ export default function calculateCasement(input, sash = 1) {
         <td>--</td>
       </tr>
     `;
-    sash = 2 ? html += `
+    sash == 2 ? html += `
       <tr>
         <td>Molium height</td>
         <td>${h - 60}</td>
