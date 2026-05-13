@@ -215,42 +215,39 @@ header {
       opacity: 1;
     }
   }
-  @media (min-width: $big-tab) {
-    .overlay,
-    .hamburger {
-      display: none;
-    }
-    nav {
-      padding: 0;
-      position: static;
-      transform: translateY(0);
-      transition: all 0.5s;
-      background: transparent;
-      color: var(--bg);
-      @include df(right, center, row, 20px);
-      .close {
-        display: none;
-      }
-      ul {
-        @include df(right, center, row, 10px);
-        li {
-          &:not(:last-of-type) {
-            border-right: 2px solid var(--txt);
-            padding-right: 10px;
-          }
-          a {
-            font-size: 14px;
-            padding: 0;
-            border: none;
-            &:hover {
-              color: var(--tl);
-              background: transparent;
-            }
-          }
-        }
-      }
-    }
-  }
+  // @media (min-width: $big-tab) {
+  //   .overlay,
+  //   .hamburger {
+  //     display: none;
+  //   }
+  //   nav {
+  //     padding: 0;
+  //     position: static;
+  //     transform: translateY(0);
+  //     transition: all 0.5s;
+  //     background: transparent;
+  //     color: var(--bg);
+  //     @include df(right, center, row, 20px);
+  //     .close {
+  //       display: none;
+  //     }
+  //     ul {
+  //       @include df(right, center, row, 10px);
+  //       li {
+  //         a {
+  //           font-size: 14px;
+  //           padding: 0;
+  //           border: none;
+  //           color: #000;
+  //           &.active {
+  //             font-size: inherit;
+  //             color: teal;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 main {

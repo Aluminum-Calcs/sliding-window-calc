@@ -25,7 +25,9 @@
     opacity: 1;
   }
 }
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -109,6 +111,8 @@ header .overlay {
 }
 header .hamburger {
   transition: all 0.5s;
+  border-radius: 2px;
+  overflow: hidden;
   display: flex;
   justify-content: normal;
   align-items: normal;
@@ -117,10 +121,11 @@ header .hamburger {
 }
 header .hamburger span {
   width: 25px;
-  height: 4px;
+  height: 3px;
   background: #121212;
 }
 header nav {
+  border-radius: 10px 10px 0 0;
   padding: 20px var(--sp);
   position: fixed;
   z-index: 7;
@@ -165,38 +170,26 @@ header nav ul {
   align-self: start;
   display: flex;
   justify-content: normal;
-  align-items: start;
+  align-items: normal;
   flex-flow: column;
   gap: 20px;
 }
 header nav ul li {
   display: flex;
   justify-content: normal;
-  align-items: start;
+  align-items: normal;
   flex-flow: column;
   gap: 20px;
 }
 header nav ul li a {
-  cursor: pointer;
-  background: var(--bg);
-  color: var(--txt);
-  border: 1px solid;
-  padding: 5px 20px;
-  text-decoration: none;
-  font: inherit;
-  font-size: 15px;
-  transition: all 0.3s;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: row;
-  gap: 10px;
-}
-header nav ul li a:hover {
-  background: var(--txt);
-  border-color: var(--txt);
   color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+header nav ul li a.active {
+  color: var(--bg);
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 header #ch:checked ~ nav {
   transform: translateY(0);
@@ -207,47 +200,6 @@ header #ch:checked ~ .hamburger {
 header #ch:checked ~ .overlay {
   transform: translateY(0);
   opacity: 1;
-}
-@media (min-width: 900px) {
-  header .overlay, header .hamburger {
-    display: none;
-  }
-  header nav {
-    padding: 0;
-    position: static;
-    transform: translateY(0);
-    transition: all 0.5s;
-    background: transparent;
-    color: var(--bg);
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    flex-flow: row;
-    gap: 20px;
-  }
-  header nav .close {
-    display: none;
-  }
-  header nav ul {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    flex-flow: row;
-    gap: 10px;
-  }
-  header nav ul li:not(:last-of-type) {
-    border-right: 2px solid var(--txt);
-    padding-right: 10px;
-  }
-  header nav ul li a {
-    font-size: 14px;
-    padding: 0;
-    border: none;
-  }
-  header nav ul li a:hover {
-    color: var(--tl);
-    background: transparent;
-  }
 }
 
 main {
@@ -321,6 +273,7 @@ form fieldset .types label {
   border: 1px solid;
   padding: 10px;
   border-radius: 10px;
+  background: #fff;
   display: flex;
   justify-content: normal;
   align-items: center;
@@ -383,6 +336,23 @@ form fieldset.error .error-msg {
   opacity: 1;
   height: 100%;
   color: crimson;
+}
+form fieldset.sash-field {
+  background: rgba(103, 163, 45, 0.1);
+  height: 0;
+  opacity: 0;
+  transition: all 0.5s;
+}
+form fieldset.sash-field.show {
+  height: auto;
+  opacity: 1;
+}
+form fieldset.sash-field .types {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+}
+form fieldset.sash-field .types .error-msg {
+  grid-column: span 2;
 }
 form .field {
   display: flex;
@@ -482,6 +452,7 @@ form button:hover {
   color: #fff;
 }
 form button {
+  font-weight: 700;
   padding: 10px;
 }
 
@@ -504,11 +475,13 @@ form button {
   border-collapse: collapse;
   border: 1px solid;
 }
-.results table td, .results table th {
+.results table td,
+.results table th {
   border: 1px solid;
   padding: 10px;
 }
-.results table thead, .results table tfoot {
+.results table thead,
+.results table tfoot {
   background: var(--bg);
   font-weight: bold;
 }
